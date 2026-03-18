@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from .models import Activity, UserStats
 from .serializers import ActivitySerializer, UserStatsSerializer
+from .tasks import recalculate_user_stats
 
 class ActivityListCreateView(generics.ListCreateAPIView):
     serializer_class = ActivitySerializer
@@ -11,6 +12,7 @@ class ActivityListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        recalculate_user_stats.delay(self.request.user.id)
 
 
 class ActivityDetailView(generics.RetrieveUpdateDestroyAPIView):
