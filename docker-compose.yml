@@ -4,7 +4,7 @@ services:
     environment:
       POSTGRES_DB: fitlog_db
       POSTGRES_USER: fitlog_user
-      POSTGRES_PASSWORD: fitlog123
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:

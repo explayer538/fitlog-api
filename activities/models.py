@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Activity(models.Model):
     ACTIVITY_TYPES = [
         ('run', 'Run'),
